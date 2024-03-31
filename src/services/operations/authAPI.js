@@ -32,7 +32,7 @@ export function sendOtp(email, navigate) {
       // }
 
       toast.success("OTP Sent Successfully")
-      // navigate("/verify-email")
+      navigate("/verify-email")
     } catch (error) {
       console.log("SENDOTP API ERROR............", error)
       toast.error("Could Not Send OTP")
@@ -55,6 +55,7 @@ export function signUp(
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
+    console.log("signup se pehle wala");
     try {
       const response = await apiConnector("POST", SIGNUP_API, {
         accountType,
@@ -65,6 +66,8 @@ export function signUp(
         confirmPassword,
         otp,
       })
+      console.log("Signup k baad");
+
 
       console.log("SIGNUP API RESPONSE............", response)
 
@@ -100,6 +103,7 @@ export function login(email, password, navigate) {
       }
 
       toast.success("Login Successful")
+      console.log(response);
       dispatch(setToken(response.data.token))
       const userImage = response.data?.user?.image
         ? response.data.user.image
@@ -164,9 +168,9 @@ export function resetPassword(password, confirmPassword, token) {
       console.log("RESET Password RESPONSE ... ", response);
 
 
-      if(!response.data.success) {
-        throw new Error(response.data.message);
-      }
+      // if(!response.data.success) {
+      //   throw new Error(response.data.message);
+      // }
 
       toast.success("Password has been reset successfully");
     }

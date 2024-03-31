@@ -10,6 +10,7 @@ function UpdatePassword() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const location = useLocation()
+  console.log(location);
   const { loading } = useSelector((state) => state.auth)
   const [formData, setFormData] = useState({
     password: "",
