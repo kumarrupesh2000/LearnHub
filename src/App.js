@@ -9,61 +9,81 @@ import UpdatePassword from "./pages/UpdatePassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import MyProfile from "./components/core/Dashboard/MyProfile";
 import About from "./pages/About";
-
+import OpenRoute from "./components/core/Auth/OpenRoute";
+import PrivateRoute from "./components/core/Auth/PrivateRoute";
+import Dashboard from "./pages/Dashboard";
 function App() {
   return (
 
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
-      <Navbar/> 
+      <Navbar />
       <Routes>
-        <Route path="/" element={<Home></Home>}></Route>
+        <Route path="/" element={<Home />} />
+        {/* <Route path="catalog/:catalogName" element={<Catalog/>} />
+      <Route path="courses/:courseId" element={<CourseDetails/>} /> */}
+
         <Route
-          path="/signup"
+          path="signup"
           element={
-        
-              <Signup/>
-         
+            <OpenRoute>
+              <Signup />
+            </OpenRoute>
           }
         />
         <Route
-          path="/login"
+          path="login"
           element={
-          
+            <OpenRoute>
               <Login />
-        
+            </OpenRoute>
           }
         />
+
         <Route
-          path="/forgot-password"
+          path="forgot-password"
           element={
-            
+            <OpenRoute>
               <ForgotPassword />
-           
+            </OpenRoute>
           }
-        />  
-        <Route
-          path="update-password/:id"
-          element={
-            
-              <UpdatePassword />
-          
-          }
-        />  
+        />
+
         <Route
           path="verify-email"
           element={
+            <OpenRoute>
               <VerifyEmail />
-          }
-        />  
-         <Route
-          path="/about"
-          element={
-            
-              <About />
-            
+            </OpenRoute>
           }
         />
-         <Route path="dashboard/my-profile" element={<MyProfile />} />
+
+        <Route
+          path="update-password/:id"
+          element={
+            <OpenRoute>
+              <UpdatePassword />
+            </OpenRoute>
+          }
+        />
+
+        <Route
+          path="/about"
+          element={
+
+            <About />
+
+          }
+        />
+        <Route element={
+          <PrivateRoute>
+          <Dashboard />
+        </PrivateRoute>
+        }>
+          <Route path="dashboard/my-profile" element={<MyProfile />} />
+
+        </Route>
+
+
 
       </Routes>
     </div>
