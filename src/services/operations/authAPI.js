@@ -20,8 +20,7 @@ export function sendOtp(email, navigate) {
     dispatch(setLoading(true))
     try {
       const response = await apiConnector("POST", SENDOTP_API, {
-        email,
-      })
+        email,})
 
       console.log("SENDOTP API RESPONSE............", response)
 
@@ -103,8 +102,10 @@ export function login(email, password, navigate) {
       }
 
       toast.success("Login Successful")
-      console.log(response);
+      console.log("After Login Response=>",response);
       dispatch(setToken(response.data.token))
+   
+
       const userImage = response.data?.user?.image
         ? response.data.user.image
         : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`

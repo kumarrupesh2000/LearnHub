@@ -22,7 +22,7 @@ export function updateDisplayPicture(token, formData) {
         formData,
         {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
+          Authorisation: `Bearer ${token}`,
         }
       )
       console.log(
@@ -48,7 +48,7 @@ export function updateProfile(token, formData) {
     const toastId = toast.loading("Loading...")
     try {
       const response = await apiConnector("PUT", UPDATE_PROFILE_API, formData, {
-        Authorization: `Bearer ${token}`,
+        Authorisation: `Bearer ${token}`,
       })
       console.log("UPDATE_PROFILE_API API RESPONSE............", response)
 

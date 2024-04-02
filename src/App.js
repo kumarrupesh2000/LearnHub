@@ -12,6 +12,9 @@ import About from "./pages/About";
 import OpenRoute from "./components/core/Auth/OpenRoute";
 import PrivateRoute from "./components/core/Auth/PrivateRoute";
 import Dashboard from "./pages/Dashboard";
+import Settings from "./components/core/Dashboard/Settings";
+import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
+
 function App() {
   return (
 
@@ -79,7 +82,9 @@ function App() {
           <Dashboard />
         </PrivateRoute>
         }>
-          <Route path="dashboard/my-profile" element={<MyProfile />} />
+          <Route path="dashboard/my-profile" element={<MyProfile/>} />
+          <Route path="dashboard/Settings" element={<Settings/>} />
+          <Route path="dashboard/enrolled-courses" element={<EnrolledCourses/>}/>
 
         </Route>
 
