@@ -88,12 +88,12 @@ exports.isAdmin = async (req, res, next) => {
 // Instructor
 exports.isInstructor = async (req, res, next) => {
 	try {
-		// const userDetails = await User.findOne({ email: req.user.email });
-		// console.log(userDetails);
+		const userDetails = await User.findOne({ email: req.user.email });
+		console.log(userDetails);
 
-		// console.log(userDetails.accountType);
+		console.log(userDetails.accountType);
 
-        if (req.user.accountType !== "Instructor") {
+        if (userDetails.accountType !== "Instructor") {
 			return res.status(401).json({
 				success: false,
 				message: "This is a Protected Route for Instructor",
