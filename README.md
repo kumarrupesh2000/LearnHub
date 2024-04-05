@@ -1,4 +1,4 @@
-# StudyNotion Online Education Platform (MERN App) 
+# LearnHub Online Education Platform (MERN App) 
 
 ![Main Page](images/homepage.png)
 
