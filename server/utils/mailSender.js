@@ -15,7 +15,7 @@ const mailSender=async(email,title,body)=>{
             }
         });
         const info=await transporter.sendMail({
-            from: 'Sona Jeweller & Company', 
+            from: 'LearnHub||Rupesh', 
             to: `${email}`,
             subject: `${title}`,
             html:`${body}`,
