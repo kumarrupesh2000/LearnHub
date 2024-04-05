@@ -36,32 +36,35 @@ function Navbar() {
 
     // ]
     // ye category wala jo drop down hogga usko dusre link pe le jayega
-    const [sublinks,setSubLinks]=useState([]);
-    console.log("showing sublinks data",sublinks);
-  
+    const [subLinks, setSubLinks] = useState([]);
+    const [loading, setLoading] = useState(false)
+    console.log("showing sublinks data", subLinks);
 
 
-    const fetchSublinks =async ()=>{
-        try{
+
+    const fetchSublinks = async () => {
+        try {
             // const result= axios.get(categories.CATEGORIES_API);
-            const result=await apiConnector("GET",categories.CATEGORIES_API);
-            console.log("printing sublink result=>",result);
+            setLoading(true)
+            const result = await apiConnector("GET", categories.CATEGORIES_API);
+            console.log("printing sublink result=>", result);
             setSubLinks(result?.data?.data);
-           
+            setLoading(false);
+
 
 
 
 
         }
-        catch(err){
+        catch (err) {
             console.log("could not fetch category list");
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchSublinks();
 
-    },[])
+    }, [])
 
 
     // agar koe confusion ho ek baar documentation dekh lena bhai
@@ -88,16 +91,30 @@ function Navbar() {
                                         <BsChevronDown />
                                         <div className='invisible absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[50%] flex flex-col rounded-md bg-richblack-5 p-4 text-richblack-900 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 lg:w-[300px] z-50'>
                                             <div className="absolute left-[50%] top-0  h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-richblack-5 "></div>
-                                            {
-                                                sublinks.length ? (
-                                                    sublinks.map((sublink, index) => (
-
-                                                        <Link key={index} to={`/${sublink.name}`}>
-                                                            <div>{sublink.name}</div>
-                                                        </Link>
-                                                    ))
-                                                ) : (<div></div>)
-                                            }
+                                            {loading ? (
+                                                <p className="text-center">Loading...</p>
+                                            ) : subLinks.length ? (
+                                                <>
+                                                    {subLinks
+                                                        ?.filter(
+                                                            (subLink) => subLink?.courses?.length > 0
+                                                        )
+                                                        ?.map((subLink, i) => (
+                                                            <Link
+                                                                to={`/catalog/${subLink.name
+                                                                    .split(" ")
+                                                                    .join("-")
+                                                                    .toLowerCase()}`}
+                                                                className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50"
+                                                                key={i}
+                                                            >
+                                                                <p>{subLink.name}</p>
+                                                            </Link>
+                                                        ))}
+                                                </>
+                                            ) : (
+                                                <p className="text-center">No Courses Found</p>
+                                            )}
 
                                         </div>
 

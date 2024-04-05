@@ -40,7 +40,7 @@ exports.capturePayment = async (req, res) => {
         // chuki course k model me userid object id me store hai aur user_id string k form me eslyea convert kiya 
 
         const uid = new mongoose.Types.ObjectId(userId)
-        if (course.studentsEnroled.includes(uid)) {
+        if (course.studentsEnrolled.includes(uid)) {
           return res
             .status(200)
             .json({ success: false, message: "Student is already Enrolled" })

@@ -11,12 +11,15 @@ exports.createSubSection = async (req, res) => {
     const video = req.files.videoFile
 
     // Check if all necessary fields are provided
+    if(!video){
+      console.log("Video File not exist");
+    }
     if (!sectionId || !title || !description || !video) {
       return res
         .status(404)
         .json({ success: false, message: "All Fields are Required" })
     }
-    console.log(video)
+    console.log("Uploaded video=>",video)
 
     // Upload the video file to Cloudinary
     const uploadDetails = await uploadImageToCloudinary(
